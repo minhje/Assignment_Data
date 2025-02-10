@@ -32,24 +32,17 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
     }
 
     // READ
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null)
+    public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        IQueryable<TEntity> query = _dbSet;
-
-        if (includeExpression != null)
-            query = includeExpression(query);
-        
-        return await query.ToListAsync();
+        return await _dbSet.ToListAsync();
     }
 
-    public virtual async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, Func<IQueryable<TEntity>, IQueryable<TEntity>>? includeExpression = null)
+    public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)
     {
-        IQueryable<TEntity> query = _dbSet;
+        if (expression == null)
+            return null!;
 
-        if (includeExpression != null)
-            query = includeExpression(query);
-
-        return await query.FirstOrDefaultAsync(predicate);
+        return await _dbSet.FirstOrDefaultAsync(expression) ?? null!;
     }
 
     // UPDATE
@@ -84,11 +77,10 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
 
         try
         {
-            var existingEntity = await _dbSet.FirstOrDefaultAsync(expression) ?? null!;
-            if (existingEntity == null)
+            var entity = await _dbSet.FirstOrDefaultAsync(expression);
+            if (entity == null)
                 return false;
-
-            _dbSet.Remove(existingEntity);
+            _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
             return true;
         }
@@ -98,7 +90,5 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
             return false;
         }
     }
-
-
 
 }

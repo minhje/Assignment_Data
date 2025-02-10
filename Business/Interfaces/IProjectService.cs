@@ -12,5 +12,7 @@ public interface IProjectService
     Task<ProjectModel> GetProjectAsync(Expression<Func<ProjectEntity, bool>> expression);
     Task<ProjectModel> UpdateProjectAsync(ProjectUpdateForm form);
     Task<bool> DeleteProjectAsync(int id);
-    Task<bool> CheckIfProjectExistsAsync(Expression<Func<ProjectEntity, bool>> expression);
+    //Task<bool> UpdateProjectAsync(ProjectModel projectModel);
+
+    //Task<bool> CheckIfProjectExistsAsync(Expression<Func<ProjectEntity, bool>> expression);
 }

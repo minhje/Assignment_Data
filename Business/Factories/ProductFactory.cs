@@ -31,7 +31,7 @@ public class ProductFactory
         StatusType = productModel.StatusType!
     };
 
-    public static ProductEntity CreateEntity(ProductUpdateForm form) => new()
+    public static ProductEntity CreateEntity(ProductEntity productEntity, ProductUpdateForm form) => new()
     {
         ProductName = form.ProductName,
         Price = form.Price,

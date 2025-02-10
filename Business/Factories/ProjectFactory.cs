@@ -42,7 +42,7 @@ public class ProjectFactory
         StatusId = projectModel.StatusId
     };
 
-    public static ProjectEntity CreateEntity(ProjectUpdateForm form) => new()
+    public static ProjectEntity CreateEntity(ProjectEntity projectEntity, ProjectUpdateForm form) => new()
     {
         Title = form.Title,
         Description = form.Description,

@@ -7,10 +7,10 @@ namespace Business.Interfaces;
 
 public interface ICustomerService
 {
-    Task<CustomerModel> CreateCustomerAsync(CustomerRegistrationForm form);
+    Task CreateCustomerAsync(CustomerRegistrationForm form);
     Task<IEnumerable<CustomerModel>> GetAllCustomersAsync();
     Task<CustomerModel> GetCustomerAsync(Expression<Func<CustomerEntity, bool>> expression);
     Task<CustomerModel> UpdateCustomerAsync(CustomerUpdateForm form);
     Task<bool> DeleteCustomerAsync(int id);
-    Task<bool> CheckIfCustomerExistsAsync(Expression<Func<CustomerEntity, bool>> expression);
+    //Task<bool> CheckIfCustomerExistsAsync(Expression<Func<CustomerEntity, bool>> expression);
 }

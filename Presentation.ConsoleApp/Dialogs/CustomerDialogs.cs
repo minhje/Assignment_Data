@@ -1,7 +1,5 @@
-﻿using Business.Dtos;
-using Data.Entities;
+﻿using Data.Entities;
 using Data.Interfaces;
-using Data.Repositories;
 using Presentation.ConsoleApp.Interfaces;
 
 public class CustomerDialogs : ICustomerDialogs
@@ -60,7 +58,7 @@ public class CustomerDialogs : ICustomerDialogs
     {
         Console.Clear();
         var customerEntity = new CustomerEntity();
-        Console.WriteLine("Enter customer name:");
+        Console.Write("Enter customer name:");
         customerEntity.CustomerName = Console.ReadLine()!;
 
         var result = await _customerRepository.CreateAsync(customerEntity);
@@ -96,7 +94,7 @@ public class CustomerDialogs : ICustomerDialogs
     private async Task GetAsync()
     {
         Console.Clear();
-        Console.WriteLine("Enter customer id:");
+        Console.Write("Enter customer id:");
         var id = Convert.ToInt32(Console.ReadLine());
         var customer = await _customerRepository.GetAsync(x => x.Id == id);
         if (customer == null)
@@ -125,7 +123,7 @@ public class CustomerDialogs : ICustomerDialogs
     private async Task UpdateAsync()
     {
         Console.Clear();
-        Console.WriteLine("Enter customer id:");
+        Console.Write("Enter customer id:");
         var id = Convert.ToInt32(Console.ReadLine());
         var customer = await _customerRepository.GetAsync(x => x.Id == id);
         if (customer == null)
@@ -151,7 +149,6 @@ public class CustomerDialogs : ICustomerDialogs
     private async Task DeleteAsync()
     {
         Console.Clear();
-        await GetAllAsync();
 
         Console.Write("Enter customer id:");
         var id = Convert.ToInt32(Console.ReadLine());
@@ -179,4 +176,4 @@ public class CustomerDialogs : ICustomerDialogs
         Console.ReadKey();
     }
 
-}
+}  

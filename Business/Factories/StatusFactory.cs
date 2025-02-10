@@ -23,7 +23,7 @@ public class StatusFactory
         Status = statusModel.Status
     };
 
-    public static StatusEntity CreateEntity(StatusUpdateForm form) => new()
+    public static StatusEntity CreateEntity(StatusEntity statusEntity, StatusUpdateForm form) => new()
     {
         Id = form.Id,
         StatusName = form.Status

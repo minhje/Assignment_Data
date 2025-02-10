@@ -25,7 +25,7 @@ public class CustomerFactory
         CustomerName = customerModel.CustomerName
     };
 
-    public static CustomerEntity CreateEntity(CustomerUpdateForm form) => new()
+    public static CustomerEntity CreateEntity(CustomerEntity customerEntity, CustomerUpdateForm form) => new()
     {
         Id = form.Id,
         CustomerName = form.CustomerName
