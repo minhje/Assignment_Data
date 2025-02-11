@@ -5,11 +5,17 @@ namespace MainApp
 {
     public partial class MainWindow : Window
     {
-        public MainWindow(MainViewModel viewModel)
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = viewModel;
         }
+
+        public MainWindow(MainViewModel viewModel)
+        {
+            DataContext = viewModel;
+            InitializeComponent();
+        }
+
         private void TopBar_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)

@@ -34,7 +34,15 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
     // READ
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
     {
-        return await _dbSet.ToListAsync();
+        try
+        {
+            return await _dbSet.ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error getting all {nameof(TEntity)}:: {ex.Message}");
+            return null!;
+        }
     }
 
     public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression)

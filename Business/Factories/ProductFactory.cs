@@ -11,7 +11,6 @@ public class ProductFactory
     {
         ProductName = form.ProductName,
         Price = form.Price,
-        StatusType = form.StatusType
 
     };
 
@@ -20,7 +19,6 @@ public class ProductFactory
         Id = entity.Id,
         ProductName = entity.ProductName,
         Price = entity.Price,
-        StatusType = entity.StatusType
     };
 
     public static ProductUpdateForm CreateUpdateForm(ProductModel productModel) => new()
@@ -35,6 +33,5 @@ public class ProductFactory
     {
         ProductName = form.ProductName,
         Price = form.Price,
-        StatusType = form.StatusType
     };
 }

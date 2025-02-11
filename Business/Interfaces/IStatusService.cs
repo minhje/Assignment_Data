@@ -12,5 +12,4 @@ public interface IStatusService
     Task<StatusModel> GetStatusAsync(Expression<Func<StatusEntity, bool>> expression);
     Task<StatusModel> UpdateStatusAsync(StatusUpdateForm form);
     Task<bool> DeleteStatusAsync(int id);
-    //Task<bool> CheckIfStatusExistsAsync(Expression<Func<StatusEntity, bool>> expression);
 }

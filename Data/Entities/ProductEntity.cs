@@ -1,5 +1,4 @@
-﻿using Data.Interfaces;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data.Entities;
@@ -14,7 +13,4 @@ public class ProductEntity
 
     [Column(TypeName = "decimal(18,2)")]
     public decimal Price { get; set; }
-
-    [Column(TypeName = "nvarchar(50)")]
-    public string? StatusType { get; set; }
 }

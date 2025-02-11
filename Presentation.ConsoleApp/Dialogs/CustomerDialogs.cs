@@ -1,5 +1,6 @@
 ﻿using Data.Entities;
 using Data.Interfaces;
+using Presentation.ConsoleApp.Dialogs;
 using Presentation.ConsoleApp.Interfaces;
 
 public class CustomerDialogs : ICustomerDialogs
@@ -16,16 +17,16 @@ public class CustomerDialogs : ICustomerDialogs
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("----------------------------");
-            Console.WriteLine("Välj ett alternativ:");
+            Console.WriteLine("---------- CUSTOMER MENU ----------");
             Console.WriteLine("1. Add new customer");
             Console.WriteLine("2. Show all customers");
             Console.WriteLine("3. Show customer details");
             Console.WriteLine("4. Update customer");
             Console.WriteLine("5. Delete customer");
-            Console.WriteLine("6. Exit application");
-            Console.WriteLine("----------------------------");
+            Console.WriteLine("6. Back to main menu");
+            Console.WriteLine("-----------------------------------");
 
+            Console.Write("Choose an option: ");
             var choice = Console.ReadLine();
 
             switch (choice)
@@ -46,9 +47,10 @@ public class CustomerDialogs : ICustomerDialogs
                     await DeleteAsync();
                     break;
                 case "6":
-                    return;
+                    await MainMenuDialog();
+                    break;
                 default:
-                    Console.WriteLine("Ogiltigt val, försök igen.");
+                    Console.WriteLine("Invalid option, try again.");
                     break;
             }
         }
@@ -58,19 +60,20 @@ public class CustomerDialogs : ICustomerDialogs
     {
         Console.Clear();
         var customerEntity = new CustomerEntity();
+        Console.WriteLine("---------- ADD NEW CUSTOMER ----------");
         Console.Write("Enter customer name:");
         customerEntity.CustomerName = Console.ReadLine()!;
 
         var result = await _customerRepository.CreateAsync(customerEntity);
         if (result != null)
         {
-            Console.WriteLine($"Customer: {customerEntity.CustomerName} has been added.");
+            Console.WriteLine($"Customer: {customerEntity.CustomerName} created successfully");
         }
         else
         {
             Console.WriteLine("Error creating customer.");
-            return;
         }
+        Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
 
     }
@@ -103,20 +106,8 @@ public class CustomerDialogs : ICustomerDialogs
             return;
         }
         Console.WriteLine($"Id: {customer.Id}, Name: {customer.CustomerName}");
-        Console.WriteLine("Do you want to delete this customer? (y/n)");
-        var choice = Console.ReadLine();
-        if (choice == "y")
-        {
-            var result = await _customerRepository.DeleteAsync(x => x.Id == id);
-            if (result)
-            {
-                Console.WriteLine("Customer has been deleted.");
-            }
-            else
-            {
-                Console.WriteLine("Error deleting customer.");
-            }
-        }
+        
+        Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
 
@@ -143,6 +134,8 @@ public class CustomerDialogs : ICustomerDialogs
         {
             Console.WriteLine("Error updating customer.");
         }
+
+        Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
 
@@ -160,7 +153,7 @@ public class CustomerDialogs : ICustomerDialogs
         }
         Console.WriteLine($"Id: {customer.Id}, Name: {customer.CustomerName}");
         Console.WriteLine("Do you want to delete this customer? (y/n)");
-        var choice = Console.ReadLine();
+        var choice = Console.ReadLine()!.ToLower();
         if (choice == "y")
         {
             var result = await _customerRepository.DeleteAsync(x => x.Id == id);
@@ -173,7 +166,14 @@ public class CustomerDialogs : ICustomerDialogs
                 Console.WriteLine("Error deleting customer.");
             }
         }
+        Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
+    }
+    private async Task MainMenuDialog()
+    {
+        Console.Clear();
+        Console.WriteLine("Returning to main menu...");
+        await Task.Delay(1000);
     }
 
 }  

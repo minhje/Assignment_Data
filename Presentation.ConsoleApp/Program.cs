@@ -1,10 +1,9 @@
-﻿using Business.Dtos;
-using Data.Contexts;
-using Data.Entities;
+﻿using Data.Contexts;
 using Data.Interfaces;
 using Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.ConsoleApp.Dialogs;
 using Presentation.ConsoleApp.Interfaces;
 
 var services = new ServiceCollection()
@@ -14,9 +13,20 @@ var services = new ServiceCollection()
     .AddScoped<IStatusRepository, StatusRepository>()
     .AddScoped<IManagerRepository, ManagerRepository>()
     .AddScoped<IProjectRepository, ProjectRepository>()
-    .AddScoped<ICustomerDialogs, CustomerDialogs>();
+
+    .AddScoped<IMainMenuDialog, MainMenuDialog>()
+    .AddScoped<ICustomerDialogs, CustomerDialogs>()
+    .AddScoped<IProductDialogs, ProductDialogs>()
+    .AddScoped<IManagerDialogs, ManagerDialogs>()
+    .AddScoped<IProjectDialogs, ProjectDialogs>()
+    .AddScoped<IStatusDialogs, StatusDialogs>();
 
 var serviceProvider = services.BuildServiceProvider();
 var customerDialogs = serviceProvider.GetRequiredService<ICustomerDialogs>();
+var productDialogs = serviceProvider.GetRequiredService<IProductDialogs>();
+var managerDialogs = serviceProvider.GetRequiredService<IManagerDialogs>();
+var projectDialogs = serviceProvider.GetRequiredService<IProjectDialogs>();
+var mainMenuDialog = serviceProvider.GetRequiredService<IMainMenuDialog>();
 
-await customerDialogs.MenuOptions();
+await mainMenuDialog.MainMenu();
+

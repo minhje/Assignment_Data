@@ -37,8 +37,6 @@ public partial class App : Application
                 services.AddScoped<IProjectService, ProjectService>();
                 services.AddSingleton<ProjectModel>();
 
-                services.AddSingleton<MainWindow>();
-
                 services.AddSingleton<MainViewModel>();
                 services.AddSingleton<MainView>();
 
@@ -55,8 +53,6 @@ public partial class App : Application
                 services.AddTransient<DetailsView>();
             })
             .Build();
-
-
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -64,8 +60,8 @@ public partial class App : Application
         var mainViewModel = _host.Services.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _host.Services.GetRequiredService<ListViewModel>();
 
-        var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-        mainWindow.DataContext = mainViewModel;
+        var mainWindow = new MainWindow(mainViewModel);
         mainWindow.Show();
     }
 }
+
