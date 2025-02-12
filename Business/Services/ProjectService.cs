@@ -2,23 +2,26 @@
 using Business.Factories;
 using Business.Interfaces;
 using Business.Models;
+using Data.Contexts;
 using Data.Entities;
 using Data.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Business.Services;
 
-public class ProjectService(IProjectRepository projectRepository) : IProjectService
+public class ProjectService(IProjectRepository projectRepository, DataContext context) : IProjectService
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
+    private readonly DataContext _context = context;
 
     public async Task<ProjectModel> CreateProjectAsync(ProjectRegistrationForm form)
-    { 
+    {
         if (form != null)
         {
             Console.WriteLine("Project already exists");
         }
-        
+
         try
         {
             var project = ProjectFactory.CreateEntity(form);
@@ -106,4 +109,48 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
         return true;
     }
 
+    /* Dessa nedanför är genererade av Chat GTP 4o för att kunna ladda in dessa till min WPF applikation. 
+     * Metoden hämtar från databasen och skapar en lista av modeller som sedan returneras.
+     */
+    public async Task<IEnumerable<ManagerModel>> GetManagersAsync()
+    {
+        var managers = await _context.Managers.ToListAsync();
+        return managers.Select(m => new ManagerModel
+        {
+            Id = m.Id,
+            FirstName = m.FirstName,
+            LastName = m.LastName
+        });
+    }
+
+    public async Task<IEnumerable<CustomerModel>> GetCustomersAsync()
+    {
+        var customers = await _context.Customers.ToListAsync();
+        return customers.Select(c => new CustomerModel
+        {
+            Id = c.Id,
+            CustomerName = c.CustomerName
+        });
+    }
+
+    public async Task<IEnumerable<ProductModel>> GetProductsAsync()
+    {
+        var products = await _context.Products.ToListAsync();
+        return products.Select(p => new ProductModel
+        {
+            Id = p.Id,
+            ProductName = p.ProductName,
+            Price = p.Price
+        });
+    }
+
+    public async Task<IEnumerable<StatusModel>> GetStatusesAsync()
+    {
+        var statuses = await _context.Statuses.ToListAsync();
+        return statuses.Select(s => new StatusModel
+        {
+            Id = s.Id,
+            Status = s.StatusName
+        });
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using MainApp.ViewModels;
+using System.Windows.Controls;
 namespace MainApp.Views;
 
 public partial class AddView : UserControl

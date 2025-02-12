@@ -22,7 +22,7 @@ public partial class ListViewModel : ObservableObject
         _projectService = projectService;
         _serviceProvider = serviceProvider;
         _projects = new ObservableCollection<ProjectModel>();
-        Task.Run(async () => await GetAllProjectsAsync());
+        GetAllProjectsAsync();
     }
 
     private async Task GetAllProjectsAsync()

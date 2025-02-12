@@ -79,8 +79,8 @@
     </Style>
 
     <!-- Add Button -->
-    <Style x:Key="AddButton" TargetType="Button">
-        <Setter Property="Content" Value="Add new contact" />
+    <Style x:Key="AddProjectButton" TargetType="Button">
+        <Setter Property="Content" Value="Add new project" />
         <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Background" Value="#607D8B" />

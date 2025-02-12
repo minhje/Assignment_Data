@@ -12,7 +12,11 @@ public interface IProjectService
     Task<ProjectModel> GetProjectAsync(Expression<Func<ProjectEntity, bool>> expression);
     Task<ProjectModel> UpdateProjectAsync(ProjectUpdateForm form);
     Task<bool> DeleteProjectAsync(int id);
-    //Task<bool> UpdateProjectAsync(ProjectModel projectModel);
 
-    //Task<bool> CheckIfProjectExistsAsync(Expression<Func<ProjectEntity, bool>> expression);
+
+    /* Genererat av Chat GPT 4o för att kunna ladda in modellerna för ComboBox i min WPF applikation  */
+    Task<IEnumerable<ManagerModel>> GetManagersAsync();
+    Task<IEnumerable<CustomerModel>> GetCustomersAsync();
+    Task<IEnumerable<ProductModel>> GetProductsAsync();
+    Task<IEnumerable<StatusModel>> GetStatusesAsync();
 }

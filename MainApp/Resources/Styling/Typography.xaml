@@ -49,6 +49,19 @@
         <Setter Property="MinHeight" Value="30"/>
     </Style>
 
+    <!-- DATE PICKERS -->
+    <Style x:Key="DatePicker" TargetType="DatePicker">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#212121"/>
+        <Setter Property="BorderBrush" Value="#BDBDBD"/>
+    </Style>
+
+    <!-- COMBO BOX -->
+    <Style x:Key="ComboBox" TargetType="ComboBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="#212121"/>
+        <Setter Property="BorderBrush" Value="#BDBDBD"/>
+    </Style>
 
 
 </ResourceDictionary>
