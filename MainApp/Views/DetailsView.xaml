@@ -4,9 +4,60 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MainApp.Views"
+             xmlns:viewmodels="clr-namespace:MainApp.ViewModels"
+             xmlns:views="clr-namespace:MainApp.Views"
+             xmlns:models="clr-namespace:Business.Models;assembly=Business"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DetailsViewModel}"
              mc:Ignorable="d" 
-             Background="Transparent"
-             
-             
+             Background="Transparent" 
              d:DesignHeight="700" d:DesignWidth="1000">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Contact details" Style="{StaticResource Heading}"/>
+
+        <StackPanel Grid.Row="1" Margin="0 20 0 0">
+            <TextBlock Text="Project Id" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.Id}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Title" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.Title}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Description" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.Description}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Start date" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.StartDate}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="End date" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.EndDate}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Status" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.StatusId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Product" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.ProductId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+            <TextBlock Text="Customer" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.CustomerId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            
+            <TextBlock Text="Manager" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProjectModel.ManagerId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <Button Content="Edit" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToEditViewCommand }" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Cancel" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToListViewCommand }" Style="{StaticResource PrimaryButton}"/>
+
+        </StackPanel>
+
+    </Grid>
 </UserControl>
+
+ 

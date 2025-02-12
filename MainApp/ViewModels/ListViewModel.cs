@@ -2,7 +2,6 @@
 using Business.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
@@ -22,7 +21,7 @@ public partial class ListViewModel : ObservableObject
         _projectService = projectService;
         _serviceProvider = serviceProvider;
         _projects = new ObservableCollection<ProjectModel>();
-        GetAllProjectsAsync();
+        Task.Run(async () => await GetAllProjectsAsync()).Wait(); // Genererat av Chat GPT 4o då jag hade problem med att projekten inte laddades in direkt när applikationen startades. 
     }
 
     private async Task GetAllProjectsAsync()

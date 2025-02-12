@@ -8,14 +8,11 @@
              xmlns:views="clr-namespace:MainApp.Views"
              xmlns:models="clr-namespace:Business.Models;assembly=Business"
              d:DataContext="{d:DesignInstance Type=viewmodels:ListViewModel}"
-             
-             
              mc:Ignorable="d" 
              Background="Transparent"
-            
              d:DesignHeight="700" d:DesignWidth="1000">
 
-    <Border Background="#ECF0F1" CornerRadius="2" >
+    <Border Background="#ECF0F1" CornerRadius="2">
         <Grid Margin="10 40 10 10" Background="#BDC3C7">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -25,39 +22,45 @@
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}"/>
-                <Button Grid.Column="1" Command="{Binding GoToAddViewCommand}" Style="{StaticResource AddProjectButton}" />
+                <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}" Margin="10"/>
+                <Button Grid.Column="1" Command="{Binding GoToAddViewCommand}" Style="{StaticResource AddProjectButton}" Margin="10"/>
             </Grid>
 
-            <ListView Grid.Row="1" ItemsSource="{Binding Projects}">
+            
+            <!--Tog hjälp av ChatGPT 4o för att få designen bättre, den la till columnerna för projektet, jag gjorde de sista justeringarna själv. -->
+            <ListView Grid.Row="1" ItemsSource="{Binding Projects}" Margin="10">
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="models:ProjectModel">
-                        <Border>
+                        <Border Margin="5">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="140"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0">
-                                    <TextBlock Text="{Binding Title}" Style="{StaticResource SecondaryHeading}"/>
-                                    <TextBlock Text="{Binding Description}" Style="{StaticResource Text}"/>
+                                <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5"/>
+                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Title}" Style="{StaticResource Text}" Margin="5"/>
+                                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding StartDate}" Style="{StaticResource Text}" Margin="5"/>
+                                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="{Binding EndDate}" Style="{StaticResource Text}" Margin="5"/>
+                                <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="{Binding StatusId}" Style="{StaticResource Text}" Margin="5"/>
 
-                                </StackPanel>
-
-                                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
                                     <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource DetailsButton}" Margin="0 0 5 0"/>
-                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteContactCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" />
+                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteContactCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" Margin="0 0 5 0"/>
                                 </StackPanel>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </Grid>
     </Border>
 </UserControl>

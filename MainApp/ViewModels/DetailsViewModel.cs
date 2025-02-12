@@ -1,7 +1,10 @@
-﻿using Business.Models;
+﻿using Business.Dtos;
+using Business.Interfaces;
+using Business.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.ObjectModel;
 
 namespace MainApp.ViewModels;
 
@@ -29,4 +32,6 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider) : Observ
         var listViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
         mainViewModel.CurrentViewModel = listViewModel;
     }
+
+
 }

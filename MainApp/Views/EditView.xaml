@@ -3,10 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MainApp.Views"
+             xmlns:views="clr-namespace:MainApp.Views"
+             xmlns:viewmodels="clr-namespace:MainApp.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddViewModel}"
              mc:Ignorable="d" 
+             Background="#FFFFFF"
              d:DesignHeight="700" d:DesignWidth="1000">
-    <Grid>
-            
-    </Grid>
+    <Border>
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Edit project" Style="{StaticResource Heading}"/>
+
+            <StackPanel Grid.Row="1" Margin="0 20 0 0">
+                <TextBlock Text="Project Title" Style="{StaticResource Text}"/>
+                <TextBox Text="{Binding ProjectRegistrationForm.Title}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+
+                <TextBlock Text="Description" Style="{StaticResource Text}"/>
+                <TextBox Text="{Binding ProjectRegistrationForm.Description}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+
+                <TextBlock Text="Start Date" Style="{StaticResource Text}"/>
+                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.StartDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+
+                <TextBlock Text="End Date" Style="{StaticResource Text}"/>
+                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.EndDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+
+                <TextBlock Text="Status" Style="{StaticResource Text}"/>
+                <ComboBox ItemsSource="{Binding Statuses}"
+                      DisplayMemberPath="Status"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding ProjectRegistrationForm.StatusId}"
+                      Style="{StaticResource ComboBox}"
+                      Margin="0,0,0,10"
+                      Padding="4"/>
+
+                <TextBlock Text="Project Manager" Style="{StaticResource Text}"/>
+                <ComboBox ItemsSource="{Binding Managers}" 
+                      DisplayMemberPath="DisplayName"
+                      SelectedValuePath="Id" 
+                      SelectedValue="{Binding ProjectRegistrationForm.ManagerId}" 
+                      Style="{StaticResource ComboBox}" 
+                      Margin="0,0,0,10" 
+                      Padding="4"/>
+
+                <TextBlock Text="Project Customer" Style="{StaticResource Text}"/>
+                <ComboBox ItemsSource="{Binding Customers}"
+                      DisplayMemberPath="CustomerName"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding ProjectRegistrationForm.CustomerId}"
+                      Style="{StaticResource ComboBox}"
+                      Margin="0,0,0,10"
+                      Padding="4"/>
+
+                <TextBlock Text="Product" Style="{StaticResource Text}"/>
+                <ComboBox ItemsSource="{Binding Products}"
+                      DisplayMemberPath="ProductName"
+                      SelectedValuePath="Id"
+                      SelectedValue="{Binding ProjectRegistrationForm.ProductId}"
+                      Style="{StaticResource ComboBox}"
+                      Margin="0,0,0,10"
+                      Padding="4"/>
+            </StackPanel>
+
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Save" Padding="5" Margin="0 10 0 5" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}"/>
+                <Button Content="Cancel" Padding="5" Margin="5 10 0 5" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </UserControl>
