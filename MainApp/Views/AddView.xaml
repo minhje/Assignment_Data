@@ -1,13 +1,10 @@
 ﻿<UserControl x:Class="MainApp.Views.AddView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:MainApp.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="clr-namespace:MainApp.ViewModels"
-             xmlns:views="clr-namespace:MainApp.Views"
-             xmlns:models="clr-namespace:Business.Models;assembly=Business"
-             
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddViewModel}"
              mc:Ignorable="d" 
              Background="#FFFFFF"
              d:DesignHeight="700" d:DesignWidth="1000">
@@ -74,7 +71,7 @@
            
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Save" Padding="5" Margin="0 10 0 5" Command="{Binding SaveAsyncCommand}" Style="{StaticResource PrimaryButton}"/>
+                <Button Content="Save" Padding="5" Margin="0 10 0 5" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}"/>
                 <Button Content="Cancel" Padding="5" Margin="5 10 0 5" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}"/>
             </StackPanel>
         </Grid>

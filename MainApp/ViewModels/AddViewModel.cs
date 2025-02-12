@@ -3,10 +3,8 @@ using Business.Interfaces;
 using Business.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Data.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace MainApp.ViewModels;
 
