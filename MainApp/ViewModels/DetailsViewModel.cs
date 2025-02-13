@@ -19,7 +19,7 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider) : Observ
     private void GoToEditView()
     {
         var editViewModel = _serviceProvider.GetRequiredService<EditViewModel>();
-        editViewModel.ProjectModel = ProjectModel;
+        editViewModel.ProjectUpdateForm = ConvertToUpdateForm(ProjectModel);
 
         var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = editViewModel;
@@ -33,5 +33,19 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider) : Observ
         mainViewModel.CurrentViewModel = listViewModel;
     }
 
-
+    // Genererat av ChatGPT för att kunna uppdatera ett project. 
+    private ProjectUpdateForm ConvertToUpdateForm(ProjectModel model)
+    {
+        return new ProjectUpdateForm
+        {
+            Title = model.Title,
+            Description = model.Description,
+            StartDate = model.StartDate,
+            EndDate = model.EndDate,
+            CustomerId = model.CustomerId,
+            ProductId = model.ProductId,
+            ManagerId = model.ManagerId,
+            StatusId = model.StatusId
+        };
+    }
 }
