@@ -17,9 +17,10 @@
         Background="Transparent"
         AllowsTransparency="True"
         
-        Title="Start" Height="700" Width="1000">
-    <Border Background="#F5F5F5" CornerRadius="25">
-        <Grid Margin="15">
+        Title="Start" Height="720" Width="850">
+    
+    <Border Background="#F5F5F5" CornerRadius="3">
+        <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>

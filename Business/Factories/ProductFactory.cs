@@ -26,7 +26,6 @@ public class ProductFactory
         Id = productModel.Id,
         ProductName = productModel.ProductName,
         Price = productModel.Price,
-        StatusType = productModel.StatusType!
     };
 
     public static ProductEntity CreateEntity(ProductEntity productEntity, ProductUpdateForm form) => new()

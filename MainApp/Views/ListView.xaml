@@ -10,57 +10,68 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ListViewModel}"
              mc:Ignorable="d" 
              Background="Transparent"
-             d:DesignHeight="700" d:DesignWidth="1000">
+             d:DesignHeight="700" d:DesignWidth="900">
 
-    <Border Background="#ECF0F1" CornerRadius="2">
-        <Grid Margin="10 40 10 10" Background="#BDC3C7">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}" Margin="10"/>
-                <Button Grid.Column="1" Command="{Binding GoToAddViewCommand}" Style="{StaticResource AddProjectButton}" Margin="10"/>
-            </Grid>
-
-            
-            <!--Tog hjälp av ChatGPT 4o för att få designen bättre, den la till columnerna för projektet, jag gjorde de sista justeringarna själv. -->
-            <ListView Grid.Row="1" ItemsSource="{Binding Projects}" Margin="10">
-                <ListView.ItemTemplate>
-                    <DataTemplate DataType="models:ProjectModel">
-                        <Border Margin="5">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="40"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="20"/>
-                                    <ColumnDefinition Width="100"/>
-                                    <ColumnDefinition Width="140"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5"/>
-                                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Title}" Style="{StaticResource Text}" Margin="5"/>
-                                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding StartDate}" Style="{StaticResource Text}" Margin="5"/>
-                                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="{Binding EndDate}" Style="{StaticResource Text}" Margin="5"/>
-                                <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="{Binding StatusId}" Style="{StaticResource Text}" Margin="5"/>
-
-                                    <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource DetailsButton}" Margin="0 0 5 0"/>
-                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteProjectCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" Margin="0 0 5 0"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}" Margin="10"/>
+            <Button Grid.Column="1" Command="{Binding GoToAddViewCommand}" Style="{StaticResource AddProjectButton}" Margin="10"/>
         </Grid>
-    </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="Id" Style="{StaticResource Text}" Margin="20 5 0 0"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="Title" Style="{StaticResource Text}" Margin="20 5 0 0"/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="Start Date" Style="{StaticResource Text}" Margin="180 5 0 0"/>
+            <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="End Date" Style="{StaticResource Text}" Margin="100 5 0 0"/>
+            <TextBlock Grid.Column="4" HorizontalAlignment="Left" Text="Status" Style="{StaticResource Text}" Margin="145 5 0 0"/>
+        </Grid>
+
+        <!--Tog hjälp av ChatGPT 4o för att få designen bättre, den la till columnerna för projektet, jag gjorde de sista justeringarna själv. -->
+        <ListView Grid.Row="2" ItemsSource="{Binding Projects}" Margin="10">
+            <ListView.ItemTemplate>
+                <DataTemplate DataType="models:ProjectModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5 5 20 0"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Title}" Style="{StaticResource Text}" Margin="5 5 100 0"/>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding StartDate}" Style="{StaticResource Text}" Margin="5 5 20 0"/>
+                        <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="{Binding EndDate}" Style="{StaticResource Text}" Margin="5 5 60 0"/>
+                        <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="{Binding StatusName}" Style="{StaticResource Text}" Margin="5 5 50 0"/>
+                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource DetailsButton}" Margin="0 0 5 0"/>
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteProjectCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" Margin="0 0 5 0"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </UserControl>

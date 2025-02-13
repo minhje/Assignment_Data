@@ -27,9 +27,19 @@ public partial class ListViewModel : ObservableObject
     private async Task GetAllProjectsAsync()
     {
         var projects = await _projectService.GetAllProjectsAsync();
+        var statuses = await _projectService.GetStatusesAsync();
+
         Projects.Clear();
         foreach (var project in projects)
         {
+            // Genererat av Chat GPT 4o för att få in statusName direkt när applikationen startar. 
+            var status = statuses.FirstOrDefault(x => x.Id == project.StatusId);
+            if (status != null)
+            {
+                project.StatusName = status.Status;
+            }
+            // slut genererad 
+
             Projects.Add(project);
         }
     }

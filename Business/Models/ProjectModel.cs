@@ -9,7 +9,7 @@ public class ProjectModel
     public string? Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public string? StatusType { get; set; }
+    public string? StatusName { get; set; }
     public int CustomerId { get; set; }
     public int ProductId { get; set; }
     public int ManagerId { get; set; }

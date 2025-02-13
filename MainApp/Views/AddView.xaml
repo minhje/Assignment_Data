@@ -20,7 +20,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="New project" Style="{StaticResource Heading}"/>
             
-            <StackPanel Grid.Row="1" Margin="0 20 0 0">
+            <StackPanel Grid.Row="1" Margin="0 15 0 0">
                 <TextBlock Text="Project ID" Style="{StaticResource Text}"/>
                 <TextBox Text="{Binding ProjectRegistrationForm.Id}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
                 

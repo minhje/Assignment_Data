@@ -49,15 +49,19 @@ public EditViewModel(IProjectService projectService, IServiceProvider servicePro
 [RelayCommand]
     private async Task SaveAsync()
     {
-        // Generarat av chat GPT 4o för att kunna uppdatera ett projekt
-        var updateForm = ConvertToUpdateForm(ProjectUpdateForm);
-        var result = await _projectService.UpdateProjectAsync(updateForm);
-        // Slut på generarad kod
-
-        if (result != null)
+        try
         {
-            var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
-            mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
+            var result = await _projectService.UpdateProjectAsync(ProjectUpdateForm);
+            if (result != null)
+            {
+                var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
+                mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Hantera eventuella fel här, t.ex. visa ett felmeddelande
+            Console.WriteLine(ex.Message);
         }
     }
 
@@ -68,21 +72,6 @@ public EditViewModel(IProjectService projectService, IServiceProvider servicePro
         mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
     }
 
-    // Generarat med chat GPT 4o för att kunna uppdatera ett projekt.  
-    private ProjectUpdateForm ConvertToUpdateForm(ProjectUpdateForm model)
-    {
-        return new ProjectUpdateForm
-        {
-            Title = model.Title,
-            Description = model.Description,
-            StartDate = model.StartDate,
-            EndDate = model.EndDate,
-            CustomerId = model.CustomerId,
-            ProductId = model.ProductId,
-            ManagerId = model.ManagerId,
-            StatusId = model.StatusId
-        };
-    }
 
     /* Generarat av Chat GPT 4o */
     private async Task LoadDataAsync()
