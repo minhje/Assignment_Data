@@ -5,15 +5,23 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Linq.Expressions;
 
 namespace MainApp.ViewModels;
 
-public partial class DetailsViewModel(IServiceProvider serviceProvider) : ObservableObject
+public partial class DetailsViewModel(IServiceProvider serviceProvider, IProjectService projectService) : ObservableObject
 {
     private readonly IServiceProvider _serviceProvider = serviceProvider;
+    private readonly IProjectService _projectService = projectService;
 
     [ObservableProperty]
     private ProjectModel _projectModel = new();
+
+    // Genererat
+    public async Task LoadProjectAsync(int projectId)
+    {
+        ProjectModel = await _projectService.GetProjectAsync(p => p.Id == projectId);
+    }
 
     [RelayCommand]
     private void GoToEditView()
@@ -33,11 +41,13 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider) : Observ
         mainViewModel.CurrentViewModel = listViewModel;
     }
 
-    // Genererat av ChatGPT för att kunna uppdatera ett project. 
+
+    // genererat
     private ProjectUpdateForm ConvertToUpdateForm(ProjectModel model)
     {
         return new ProjectUpdateForm
         {
+            Id = model.Id,
             Title = model.Title,
             Description = model.Description,
             StartDate = model.StartDate,

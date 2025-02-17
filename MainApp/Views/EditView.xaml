@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:views="clr-namespace:MainApp.Views"
              xmlns:viewmodels="clr-namespace:MainApp.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewmodels:AddViewModel}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:EditViewModel}"
              mc:Ignorable="d" 
              Background="#FFFFFF"
              d:DesignHeight="700" d:DesignWidth="900">
@@ -21,22 +21,22 @@
 
             <StackPanel Grid.Row="1" Margin="0 20 0 0">
                 <TextBlock Text="Project Title" Style="{StaticResource Text}"/>
-                <TextBox Text="{Binding ProjectRegistrationForm.Title}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+                <TextBox Text="{Binding ProjectUpdateForm.Title}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
 
                 <TextBlock Text="Description" Style="{StaticResource Text}"/>
-                <TextBox Text="{Binding ProjectRegistrationForm.Description}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+                <TextBox Text="{Binding ProjectUpdateForm.Description}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
 
                 <TextBlock Text="Start Date" Style="{StaticResource Text}"/>
-                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.StartDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+                <DatePicker SelectedDate="{Binding ProjectUpdateForm.StartDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
 
                 <TextBlock Text="End Date" Style="{StaticResource Text}"/>
-                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.EndDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+                <DatePicker SelectedDate="{Binding ProjectUpdateForm.EndDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
 
                 <TextBlock Text="Status" Style="{StaticResource Text}"/>
                 <ComboBox ItemsSource="{Binding Statuses}"
                       DisplayMemberPath="Status"
                       SelectedValuePath="Id"
-                      SelectedValue="{Binding ProjectRegistrationForm.StatusId}"
+                      SelectedValue="{Binding ProjectUpdateForm.StatusId}"
                       Style="{StaticResource ComboBox}"
                       Margin="0,0,0,10"
                       Padding="4"/>
@@ -45,7 +45,7 @@
                 <ComboBox ItemsSource="{Binding Managers}" 
                       DisplayMemberPath="DisplayName"
                       SelectedValuePath="Id" 
-                      SelectedValue="{Binding ProjectRegistrationForm.ManagerId}" 
+                      SelectedValue="{Binding ProjectUpdateForm.ManagerId}" 
                       Style="{StaticResource ComboBox}" 
                       Margin="0,0,0,10" 
                       Padding="4"/>
@@ -54,7 +54,7 @@
                 <ComboBox ItemsSource="{Binding Customers}"
                       DisplayMemberPath="CustomerName"
                       SelectedValuePath="Id"
-                      SelectedValue="{Binding ProjectRegistrationForm.CustomerId}"
+                      SelectedValue="{Binding ProjectUpdateForm.CustomerId}"
                       Style="{StaticResource ComboBox}"
                       Margin="0,0,0,10"
                       Padding="4"/>
@@ -63,7 +63,7 @@
                 <ComboBox ItemsSource="{Binding Products}"
                       DisplayMemberPath="ProductName"
                       SelectedValuePath="Id"
-                      SelectedValue="{Binding ProjectRegistrationForm.ProductId}"
+                      SelectedValue="{Binding ProjectUpdateForm.ProductId}"
                       Style="{StaticResource ComboBox}"
                       Margin="0,0,0,10"
                       Padding="4"/>

@@ -59,12 +59,13 @@ public partial class ListViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void GoToDetailsView(ProjectModel projectModel)
+    private async Task GoToDetailsView(ProjectModel projectModel)
     {
         var detailsViewModel = _serviceProvider.GetRequiredService<DetailsViewModel>();
-        detailsViewModel.ProjectModel = projectModel;
+        await detailsViewModel.LoadProjectAsync(projectModel.Id);
 
         var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = detailsViewModel;
     }
 }
+ 

@@ -58,7 +58,6 @@ public partial class AddViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            // Hantera eventuella fel här, t.ex. visa ett felmeddelande
             Console.WriteLine(ex.Message);
         }
     }

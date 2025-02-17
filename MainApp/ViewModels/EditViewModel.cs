@@ -22,24 +22,24 @@ public partial class EditViewModel : ObservableObject
         EndDate = DateTime.Now
     };
 
-/* Genererat av Chat GPT 4o för att kunna hämta in dessa till ComboBox i WPF applikationen*/
-[ObservableProperty]
-private ObservableCollection<ManagerModel> _managers = new();
+    /* Genererat av Chat GPT 4o för att kunna hämta in dessa till ComboBox i WPF applikationen*/
+    [ObservableProperty]
+    private ObservableCollection<ManagerModel> _managers = new();
 
-[ObservableProperty]
-private ObservableCollection<CustomerModel> _customers = new();
+    [ObservableProperty]
+    private ObservableCollection<CustomerModel> _customers = new();
 
-[ObservableProperty]
-private ObservableCollection<ProductModel> _products = new();
+    [ObservableProperty]
+    private ObservableCollection<ProductModel> _products = new();
 
-[ObservableProperty]
-private ObservableCollection<StatusModel> _statuses = new();
+    [ObservableProperty]
+    private ObservableCollection<StatusModel> _statuses = new();
 
-[ObservableProperty]
-private int _selectedManagerId;
-/* Slut genererad kod */
+    //[ObservableProperty]
+    //private int _selectedManagerId;
+    /* Slut genererad kod */
 
-public EditViewModel(IProjectService projectService, IServiceProvider serviceProvider)
+    public EditViewModel(IProjectService projectService, IServiceProvider serviceProvider)
 {
     _projectService = projectService;
     _serviceProvider = serviceProvider;
@@ -58,9 +58,9 @@ public EditViewModel(IProjectService projectService, IServiceProvider servicePro
                 mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
             }
         }
+
         catch (Exception ex)
         {
-            // Hantera eventuella fel här, t.ex. visa ett felmeddelande
             Console.WriteLine(ex.Message);
         }
     }

@@ -48,7 +48,7 @@ public class CustomerDialogs : ICustomerDialogs
                     break;
                 case "6":
                     await MainMenuDialog();
-                    break;
+                    return;
                 default:
                     Console.WriteLine("Invalid option, try again.");
                     break;

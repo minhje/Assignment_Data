@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DetailsViewModel}"
              mc:Ignorable="d" 
              Background="Transparent" 
-             d:DesignHeight="700" d:DesignWidth="900">
+             d:DesignHeight="700" d:DesignWidth="1000">
 
     <Grid Margin="15">
         <Grid.RowDefinitions>
@@ -38,7 +38,7 @@
             <TextBlock Text="{Binding ProjectModel.EndDate}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Status" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.StatusName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.StatusId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Product" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.ProductId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
@@ -52,8 +52,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2">
-            <Button Content="Edit" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToEditViewCommand }" Style="{StaticResource PrimaryButton}"/>
-            <Button Content="Cancel" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToListViewCommand }" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Edit" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToEditViewCommand}" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Cancel" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToListViewCommand}" Style="{StaticResource PrimaryButton}"/>
 
         </StackPanel>
 
