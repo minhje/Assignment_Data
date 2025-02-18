@@ -62,7 +62,7 @@ public partial class ListViewModel : ObservableObject
     private async Task GoToDetailsView(ProjectModel projectModel)
     {
         var detailsViewModel = _serviceProvider.GetRequiredService<DetailsViewModel>();
-        await detailsViewModel.LoadProjectAsync(projectModel.Id);
+        await detailsViewModel.GetProjectAsync(projectModel.Id);
 
         var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = detailsViewModel;

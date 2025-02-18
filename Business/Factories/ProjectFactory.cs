@@ -27,7 +27,10 @@ public class ProjectFactory
         Description = entity.Description,
         StartDate = entity.StartDate,
         EndDate = entity.EndDate,
-        StatusName = entity.Status?.StatusName
+        StatusName = entity.Status?.StatusName,
+        CustomerName = entity.Customer?.CustomerName,
+        ManagerName = entity.Manager?.FirstName,
+        ProductName = entity.Product?.ProductName
     };
 
     public static ProjectUpdateForm CreateUpdateForm(ProjectModel projectModel) => new()

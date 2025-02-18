@@ -47,13 +47,34 @@ public class ProjectService(IProjectRepository projectRepository, DataContext co
     // Genererat av Chat GTP 4o för att hämta ett project
     public async Task<ProjectModel> GetProjectAsync(Expression<Func<ProjectEntity, bool>> expression)
     {
-        var project = await _projectRepository.GetAsync(expression);
+        //var project = await _projectRepository.GetAsync(expression);
+        //if (project == null)
+        //{
+        //    Console.WriteLine("Project not found");
+        //    return null!;
+        //}
+        //var projectModel = ProjectFactory.CreateModel(project);
+        //return projectModel;
+
+        var project = await _context.Projects
+        .Include(p => p.Status)
+        .Include(p => p.Customer)
+        .Include(p => p.Manager)
+        .Include(p => p.Product)
+        .FirstOrDefaultAsync(expression);
+
         if (project == null)
         {
             Console.WriteLine("Project not found");
             return null!;
         }
+
         var projectModel = ProjectFactory.CreateModel(project);
+        projectModel.StatusName = project.Status?.StatusName;
+        projectModel.CustomerName = project.Customer?.CustomerName;
+        projectModel.ManagerName = project.Manager != null ? $"{project.Manager.FirstName} {project.Manager.LastName}" : null;
+        projectModel.ProductName = project.Product?.ProductName;
+
         return projectModel;
     }
 

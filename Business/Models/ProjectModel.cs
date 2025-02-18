@@ -14,4 +14,7 @@ public class ProjectModel
     public int ProductId { get; set; }
     public int ManagerId { get; set; }
     public int StatusId { get; set; }
+    public string? CustomerName { get; set; }
+    public string? ManagerName { get; set; }
+    public string? ProductName { get; set; }
 }

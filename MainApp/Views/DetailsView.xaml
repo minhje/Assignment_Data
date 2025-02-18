@@ -32,22 +32,22 @@
             <TextBlock Text="{Binding ProjectModel.Description}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Start date" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.StartDate}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.StartDate, StringFormat='{}{0:yyyy-MM-dd}'}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="End date" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.EndDate}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.EndDate, StringFormat='{}{0:yyyy-MM-dd}'}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Status" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.StatusId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.StatusName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Product" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.ProductId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.ProductName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Customer" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.CustomerId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.CustomerName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
             
             <TextBlock Text="Manager" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.ManagerId}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProjectModel.ManagerName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
         </StackPanel>
 

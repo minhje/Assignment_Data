@@ -31,18 +31,18 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="215"/>
+                <ColumnDefinition Width="160"/>
+                <ColumnDefinition Width="180"/>
+                <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="Id" Style="{StaticResource Text}" Margin="20 5 0 0"/>
-            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="Title" Style="{StaticResource Text}" Margin="20 5 0 0"/>
-            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="Start Date" Style="{StaticResource Text}" Margin="180 5 0 0"/>
-            <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="End Date" Style="{StaticResource Text}" Margin="100 5 0 0"/>
-            <TextBlock Grid.Column="4" HorizontalAlignment="Left" Text="Status" Style="{StaticResource Text}" Margin="145 5 0 0"/>
+            <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="Title" Style="{StaticResource Text}" Margin="15 5 0 0 "/>
+            <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="Start Date" Style="{StaticResource Text}" Margin="5"/>
+            <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="End Date" Style="{StaticResource Text}" Margin="5"/>
+            <TextBlock Grid.Column="4" HorizontalAlignment="Left" Text="Status" Style="{StaticResource Text}" Margin="5"/>
         </Grid>
 
         <!--Tog hjälp av ChatGPT 4o för att få designen bättre, den la till columnerna för projektet, jag gjorde de sista justeringarna själv. -->
@@ -51,23 +51,22 @@
                 <DataTemplate DataType="models:ProjectModel">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="45"/>
+                            <ColumnDefinition Width="205"/>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5 5 20 0"/>
-                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Title}" Style="{StaticResource Text}" Margin="5 5 100 0"/>
-                        <TextBlock Grid.Column="2" HorizontalAlignment="Center" Text="{Binding StartDate}" Style="{StaticResource Text}" Margin="5 5 20 0"/>
-                        <TextBlock Grid.Column="3" HorizontalAlignment="Center" Text="{Binding EndDate}" Style="{StaticResource Text}" Margin="5 5 60 0"/>
-                        <TextBlock Grid.Column="4" HorizontalAlignment="Center" Text="{Binding StatusName}" Style="{StaticResource Text}" Margin="5 5 50 0"/>
-                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource DetailsButton}" Margin="0 0 5 0"/>
-                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteProjectCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" Margin="0 0 5 0"/>
+                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5"/>
+                        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Title}" Style="{StaticResource Text}" Margin="5"/>
+                        <TextBlock Grid.Column="2" HorizontalAlignment="Left" Text="{Binding StartDate, StringFormat='{}{0:yyyy-MM-dd}'}" Style="{StaticResource Text}" Margin="5"/>
+                        <TextBlock Grid.Column="3" HorizontalAlignment="Left" Text="{Binding EndDate, StringFormat='{}{0:yyyy-MM-dd}'}" Style="{StaticResource Text}" Margin="5"/>
+                        <TextBlock Grid.Column="4" HorizontalAlignment="Left" Text="{Binding StatusName}" Style="{StaticResource Text}" Margin="5"/>
+                        <StackPanel Grid.Column="6" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.GoToDetailsViewCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource DetailsButton}" Margin="3"/>
+                            <Button CommandParameter="{Binding .}" Command="{Binding DataContext.DeleteProjectCommand, RelativeSource={RelativeSource AncestorType=ListView}}" Style="{StaticResource DeleteButton}" Margin="3"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

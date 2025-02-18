@@ -4,8 +4,6 @@ using Business.Models;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 
 namespace MainApp.ViewModels;
 
@@ -17,10 +15,40 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider, IProject
     [ObservableProperty]
     private ProjectModel _projectModel = new();
 
-    // Genererat
-    public async Task LoadProjectAsync(int projectId)
+    [ObservableProperty]
+    private IEnumerable<StatusModel> _statuses = new List<StatusModel>();
+
+    [ObservableProperty]
+    private IEnumerable<CustomerModel> _customers = new List<CustomerModel>();
+
+    [ObservableProperty]
+    private IEnumerable<ManagerModel> _managers = new List<ManagerModel>();
+
+    [ObservableProperty]
+    private IEnumerable<ProductModel> _products = new List<ProductModel>();
+
+    public async Task GetProjectAsync(int projectId)
     {
         ProjectModel = await _projectService.GetProjectAsync(p => p.Id == projectId);
+        if (ProjectModel == null)
+        {
+            // Hantera fallet när projektet inte hittas
+            return;
+        }
+
+        Statuses = await _projectService.GetStatusesAsync();
+        Customers = await _projectService.GetCustomersAsync();
+        Managers = await _projectService.GetManagersAsync();
+        Products = await _projectService.GetProductsAsync();
+
+        // Sätt namn för visningsändamål
+        ProjectModel.StatusName = Statuses.FirstOrDefault(s => s.Id == ProjectModel.StatusId)?.Status;
+        ProjectModel.CustomerName = Customers.FirstOrDefault(c => c.Id == ProjectModel.CustomerId)?.CustomerName;
+        ProjectModel.ManagerName = Managers.FirstOrDefault(m => m.Id == ProjectModel.ManagerId)?.DisplayName;
+        ProjectModel.ProductName = Products.FirstOrDefault(p => p.Id == ProjectModel.ProductId)?.ProductName;
+
+        // Logga för att verifiera att data sätts korrekt
+        Console.WriteLine($"Project ID: {ProjectModel.Id}, Title: {ProjectModel.Title}, Status: {ProjectModel.StatusName}, Customer: {ProjectModel.CustomerName}, Manager: {ProjectModel.ManagerName}, Product: {ProjectModel.ProductName}");
     }
 
     [RelayCommand]
@@ -41,8 +69,6 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider, IProject
         mainViewModel.CurrentViewModel = listViewModel;
     }
 
-
-    // genererat
     private ProjectUpdateForm ConvertToUpdateForm(ProjectModel model)
     {
         return new ProjectUpdateForm

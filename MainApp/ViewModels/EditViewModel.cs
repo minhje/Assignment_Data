@@ -6,7 +6,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace MainApp.ViewModels;
 
