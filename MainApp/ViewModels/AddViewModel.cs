@@ -14,11 +14,7 @@ public partial class AddViewModel : ObservableObject
     private readonly IServiceProvider _serviceProvider;
 
     [ObservableProperty]
-    private ProjectRegistrationForm _projectRegistrationForm = new()
-    {
-        StartDate = DateTime.Now,
-        EndDate = DateTime.Now
-    };
+    private ProjectRegistrationForm _projectRegistrationForm;
 
     /* Genererat av Chat GPT 4o för att kunna hämta in dessa till ComboBox i WPF applikationen*/
     [ObservableProperty]
@@ -41,7 +37,20 @@ public partial class AddViewModel : ObservableObject
     {
         _projectService = projectService;
         _serviceProvider = serviceProvider;
+        InitializeProjectRegistrationFormAsync().ConfigureAwait(false); // generarat av chat gpt 4o
         LoadDataAsync().ConfigureAwait(false);
+    }
+
+    // Genererat av Chat GPT 4o 
+    private async Task InitializeProjectRegistrationFormAsync()
+    {
+        var nextProjectId = await _projectService.GetNextProjectIdAsync();
+        ProjectRegistrationForm = new ProjectRegistrationForm
+        {
+            Id = nextProjectId,
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now
+        };
     }
 
     [RelayCommand]
@@ -52,6 +61,8 @@ public partial class AddViewModel : ObservableObject
             var result = await _projectService.CreateProjectAsync(ProjectRegistrationForm);
             if (result != null)
             {
+                ProjectRegistrationForm.Id = result.Id; // Update the form with the ID from the database
+                OnPropertyChanged(nameof(ProjectRegistrationForm)); // Notify the view of the change
                 var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
                 mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
             }

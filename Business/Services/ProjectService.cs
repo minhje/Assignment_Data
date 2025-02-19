@@ -188,4 +188,11 @@ public class ProjectService(IProjectRepository projectRepository, DataContext co
             Status = s.StatusName
         });
     }
+
+    /* Kod genererad av Chat GPT 4o för att läsa in vilket Id som är nästkommande så detta kan visas när man registrerar ett nytt projekt.  */
+    public async Task<int> GetNextProjectIdAsync()
+    {
+        var lastProject = await _context.Projects.OrderByDescending(p => p.Id).FirstOrDefaultAsync();
+        return lastProject != null ? lastProject.Id + 1 : 1;
+    }
 }
