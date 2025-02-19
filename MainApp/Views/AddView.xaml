@@ -22,7 +22,7 @@
             
             <StackPanel Grid.Row="1" Margin="0 15 0 0">
                 <TextBlock Text="Project ID" Style="{StaticResource Text}"/>
-                <TextBlock Text="{Binding ProjectRegistrationForm.Id}" Style="{StaticResource Text}" Margin="0,0,0,10" Padding="4"/>
+                <TextBlock Text="{Binding ProjectRegistrationForm.Id}" Style="{StaticResource NoEditForm}" Margin="0,0,0,10" Padding="4"/>
                 
                 <TextBlock Text="Project Title" Style="{StaticResource Text}"/>
                 <TextBox Text="{Binding ProjectRegistrationForm.Title}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
@@ -65,14 +65,14 @@
 
                 <TextBlock Text="Product" Style="{StaticResource Text}"/>
                 <ComboBox ItemsSource="{Binding Products}"
-                          DisplayMemberPath="ProductName"
+                          DisplayMemberPath="NamePrice"
                           SelectedValuePath="Id"
                           SelectedValue="{Binding ProjectRegistrationForm.ProductId}"
                           Style="{StaticResource ComboBox}"
                           Margin="0,0,0,10"
                           Padding="4"/>
             </StackPanel>    
-           
+         
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Save" Padding="5" Margin="0 10 0 5" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}"/>

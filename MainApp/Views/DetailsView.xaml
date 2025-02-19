@@ -41,7 +41,7 @@
             <TextBlock Text="{Binding ProjectModel.StatusName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Product" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProjectModel.ProductName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
+            <TextBlock Text="{Binding ProductNamePrice}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Customer" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.CustomerName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />

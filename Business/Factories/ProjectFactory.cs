@@ -30,7 +30,7 @@ public class ProjectFactory
         StatusName = entity.Status?.StatusName,
         CustomerName = entity.Customer?.CustomerName,
         ManagerName = entity.Manager?.FirstName,
-        ProductName = entity.Product?.ProductName
+        ProductName = entity.Product?.ProductName,
     };
 
     public static ProjectUpdateForm CreateUpdateForm(ProjectModel projectModel) => new()
@@ -54,7 +54,7 @@ public class ProjectFactory
         CustomerId = form.CustomerId,
         ProductId = form.ProductId,
         ManagerId = form.ManagerId,
-        StatusId = form.StatusId
+        StatusId = form.StatusId,
     };
 
 }

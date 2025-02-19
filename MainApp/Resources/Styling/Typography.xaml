@@ -49,6 +49,18 @@
         <Setter Property="MinHeight" Value="30"/>
     </Style>
 
+    <Style x:Key="NoEditForm" TargetType="TextBlock">
+        <Setter Property="Background" Value="#BDBDBD"/>
+        <Setter Property="Foreground" Value="#212121"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="MinHeight" Value="30"/>
+    </Style>
+
+
     <!-- DATE PICKERS -->
     <Style x:Key="DatePicker" TargetType="DatePicker">
         <Setter Property="Background" Value="White"/>

@@ -26,13 +26,13 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider, IProject
 
     [ObservableProperty]
     private IEnumerable<ProductModel> _products = new List<ProductModel>();
+    public string ProductNamePrice => $"{ProjectModel.ProductName} - {ProjectModel.ProductPrice:C}/h"; // Genererat med ChatGPT 4o för att kunna visa Produktnamn & pris tillsammans
 
     public async Task GetProjectAsync(int projectId)
     {
         ProjectModel = await _projectService.GetProjectAsync(p => p.Id == projectId);
         if (ProjectModel == null)
         {
-            // Hantera fallet när projektet inte hittas
             return;
         }
 
@@ -41,11 +41,15 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider, IProject
         Managers = await _projectService.GetManagersAsync();
         Products = await _projectService.GetProductsAsync();
 
-        // Sätt namn för visningsändamål
+        // Sätter namn på status, kund, manager och product. Genererat med ChatGPT 4o
         ProjectModel.StatusName = Statuses.FirstOrDefault(s => s.Id == ProjectModel.StatusId)?.Status;
         ProjectModel.CustomerName = Customers.FirstOrDefault(c => c.Id == ProjectModel.CustomerId)?.CustomerName;
         ProjectModel.ManagerName = Managers.FirstOrDefault(m => m.Id == ProjectModel.ManagerId)?.DisplayName;
-        ProjectModel.ProductName = Products.FirstOrDefault(p => p.Id == ProjectModel.ProductId)?.ProductName;
+        var product = Products.FirstOrDefault(p => p.Id == ProjectModel.ProductId);
+        ProjectModel.ProductName = product?.ProductName;
+        ProjectModel.ProductPrice = product?.Price ?? 0;
+
+        OnPropertyChanged(nameof(ProductNamePrice)); // Genererat med ChatGPT 4o för att kunna visa Produktnamn & pris tillsammans
     }
 
     [RelayCommand]

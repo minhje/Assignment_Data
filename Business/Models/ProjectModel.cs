@@ -15,4 +15,5 @@ public class ProjectModel
     public string? CustomerName { get; set; }
     public string? ManagerName { get; set; }
     public string? ProductName { get; set; }
+    public decimal ProductPrice { get; set; } // Skapad med hjälp av ChatGPT 4o för att kunna visa både namn och pris tillsammans
 }

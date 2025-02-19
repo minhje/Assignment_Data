@@ -71,7 +71,7 @@ public class ProductDialogs : IProductDialogs
             return;
         }
 
-        Console.Write("Enter product price: ");
+        Console.Write("Enter product price/h: ");
         productEntity.Price = decimal.Parse(Console.ReadLine()!);
         if (productEntity.Price <= 0)
         {

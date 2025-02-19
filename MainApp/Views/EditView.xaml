@@ -61,7 +61,7 @@
 
                 <TextBlock Text="Product" Style="{StaticResource Text}"/>
                 <ComboBox ItemsSource="{Binding Products}"
-                      DisplayMemberPath="ProductName"
+                      DisplayMemberPath="NamePrice"
                       SelectedValuePath="Id"
                       SelectedValue="{Binding ProjectUpdateForm.ProductId}"
                       Style="{StaticResource ComboBox}"
