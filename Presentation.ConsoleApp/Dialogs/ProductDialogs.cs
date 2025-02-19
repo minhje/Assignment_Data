@@ -23,7 +23,7 @@ public class ProductDialogs : IProductDialogs
             Console.WriteLine("2. Show all products");
             Console.WriteLine("3. Show product details");
             Console.WriteLine("4. Update product");
-            Console.WriteLine("5. Delete product");   
+            Console.WriteLine("5. Delete product");
             Console.WriteLine("6. Back to main menu");
             Console.WriteLine("-----------------------------------");
 
@@ -165,6 +165,7 @@ public class ProductDialogs : IProductDialogs
         Console.ReadKey();
     }
 
+    /* Tog hjälp av ChatGPT 4o för att få hjälp att kunna radera en produkt, fick även med implementation av Transaction Management så testade lägga in det här. Har det inte i någon annan dialog men Console är ej min main presentation. */
     private async Task DeleteAsync()
     {
         Console.Clear();
@@ -184,24 +185,38 @@ public class ProductDialogs : IProductDialogs
         var choice = Console.ReadLine()!.ToLower();
         if (choice != "y")
         {
+            return;
+        }
+
+        await _productRepository.BeginTransactionAsync();
+
+        try
+        {
             var result = await _productRepository.DeleteAsync(x => x.Id == id);
             if (result)
             {
+                await _productRepository.CommitTransactionAsync();
                 Console.WriteLine($"Product: {product.ProductName} deleted successfully.");
             }
             else
             {
-                Console.WriteLine("Error deleting product.");
+                throw new Exception("Error deleting product.");
             }
+        }
+        catch (Exception ex)
+        {
+            await _productRepository.RollbackTransactionAsync();
+            Console.WriteLine(ex.Message);
         }
 
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
-    private async Task MainMenuDialog()
+        private async Task MainMenuDialog()
     {
         Console.Clear();
         Console.WriteLine("Returning to main menu...");
         await Task.Delay(1000);
     }
+
 }

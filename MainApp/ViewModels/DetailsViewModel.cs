@@ -46,9 +46,6 @@ public partial class DetailsViewModel(IServiceProvider serviceProvider, IProject
         ProjectModel.CustomerName = Customers.FirstOrDefault(c => c.Id == ProjectModel.CustomerId)?.CustomerName;
         ProjectModel.ManagerName = Managers.FirstOrDefault(m => m.Id == ProjectModel.ManagerId)?.DisplayName;
         ProjectModel.ProductName = Products.FirstOrDefault(p => p.Id == ProjectModel.ProductId)?.ProductName;
-
-        // Logga för att verifiera att data sätts korrekt
-        Console.WriteLine($"Project ID: {ProjectModel.Id}, Title: {ProjectModel.Title}, Status: {ProjectModel.StatusName}, Customer: {ProjectModel.CustomerName}, Manager: {ProjectModel.ManagerName}, Product: {ProjectModel.ProductName}");
     }
 
     [RelayCommand]

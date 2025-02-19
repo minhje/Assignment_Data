@@ -56,7 +56,7 @@
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="110"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding Id}" Style="{StaticResource Text}" Margin="5"/>

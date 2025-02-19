@@ -4,6 +4,10 @@ namespace Data.Interfaces
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {
+        Task RollbackTransactionAsync();
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+
         Task<TEntity> CreateAsync(TEntity entity);
         Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> expression);
         Task<IEnumerable<TEntity>> GetAllAsync();

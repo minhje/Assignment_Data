@@ -1,6 +1,7 @@
 ﻿using Data.Contexts;
 using Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System.Linq.Expressions;
 
 namespace Data.Repositories;
@@ -9,7 +10,38 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
 {
     protected readonly DataContext _context = context;
     protected readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
+    private IDbContextTransaction _transaction = null!;
 
+    #region Transaction Management
+
+    public virtual async Task BeginTransactionAsync()
+    {
+        _transaction = await _context.Database.BeginTransactionAsync(); // Begin transaction
+    }
+
+    public virtual async Task CommitTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.CommitAsync();  // Commit transaction
+            await _transaction.DisposeAsync(); // Dispose transaction
+            _transaction = null!; // Reset transaction  
+        }
+    }
+
+    public virtual async Task RollbackTransactionAsync()
+    {
+        if (_transaction != null)
+        {
+            await _transaction.RollbackAsync(); // Rollback transaction
+            await _transaction.DisposeAsync(); // Dispose transaction
+            _transaction = null!; // Reset transaction
+        }
+    }
+
+    #endregion
+
+    #region CRUD
     // CREATE
     public virtual async Task<TEntity> CreateAsync(TEntity entity)
     {
@@ -80,23 +112,25 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
     // DELETE
     public virtual async Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> expression)
     {
-        if (expression == null)
-            return false;
-
         try
         {
             var entity = await _dbSet.FirstOrDefaultAsync(expression);
             if (entity == null)
-                return false;
+        {
+            return false;
+        }
+
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
             return true;
         }
+
         catch (Exception ex)
         {
             Console.WriteLine($"Error deleting {nameof(TEntity)}:: {ex.Message}");
             return false;
         }
     }
+    #endregion
 
 }

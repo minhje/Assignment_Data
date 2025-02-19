@@ -157,13 +157,17 @@ public class ManagerDialogs : IManagerDialogs
             Console.WriteLine("Manager not found.");
             return;
         }
-        Console.WriteLine($"Id: {manager.Id}, Name: {manager.FirstName + manager.LastName}");
+        Console.WriteLine($"Id: {manager.Id}, Name: {manager.FirstName + " " + manager.LastName}");
         Console.WriteLine("Are you sure you want to delete this manager? (y/n)");
         var result = Console.ReadLine()!.ToLower();
 
         if (result == "y")
         {
-            Console.WriteLine($"Manager {manager.FirstName + manager.LastName} deleted successfully");
+            var deleteResult = await _managerRepository.DeleteAsync(x => x.Id == id);
+            if (deleteResult)
+            {
+                Console.WriteLine($"Manager {manager.FirstName + " " + manager.LastName} deleted successfully");
+            }
         }
         else
         {

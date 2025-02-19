@@ -12,21 +12,27 @@ public class StatusService(IStatusRepository statusRepository) : IStatusService
 {
     private readonly IStatusRepository _statusRepository = statusRepository;
 
+
+    // Tog hjälp av ChatGPT 4o för att lägga in Transaction Management
     public async Task<StatusModel> CreateStatusAsync(StatusRegistrationForm form)
     {
-        if (form != null)
-        {
-            Console.WriteLine("Status already exists");
-        }
+        await _statusRepository.BeginTransactionAsync();
+
         try
         {
+            if (form == null)
+            {
+                throw new ArgumentNullException(nameof(form), "Form cannot be null");
+            }
+
             var statusEntity = StatusFactory.CreateEntity(form);
             var createdStatus = await _statusRepository.CreateAsync(statusEntity);
-            var statusModel = StatusFactory.CreateModel(createdStatus);
-            return statusModel;
+            await _statusRepository.CommitTransactionAsync();
+            return StatusFactory.CreateModel(createdStatus);
         }
         catch (Exception ex)
         {
+            await _statusRepository.RollbackTransactionAsync();
             Console.WriteLine(ex.Message);
             return null!;
         }
@@ -60,23 +66,50 @@ public class StatusService(IStatusRepository statusRepository) : IStatusService
 
     public async Task<StatusModel> UpdateStatusAsync(StatusUpdateForm form)
     {
-        var statusEntity = await _statusRepository.GetAsync(x => x.Id == form.Id);
-        if (statusEntity == null)
+        await _statusRepository.BeginTransactionAsync();
+
+        try
         {
-            throw new Exception("Status not found");
+            var statusEntity = await _statusRepository.GetAsync(x => x.Id == form.Id);
+            if (statusEntity == null)
+            {
+                throw new Exception("Status not found");
+            }
+            var updatedStatusEntity = StatusFactory.CreateEntity(statusEntity, form);
+            await _statusRepository.CommitTransactionAsync();
+            return StatusFactory.CreateModel(updatedStatusEntity);
         }
-        var updatedStatusEntity = StatusFactory.CreateEntity(statusEntity, form);
-        return StatusFactory.CreateModel(updatedStatusEntity);
+        catch (Exception ex)
+        {
+            await _statusRepository.RollbackTransactionAsync();
+            Console.WriteLine(ex.Message);
+            return null!;
+        }
+
     }
 
     public async Task<bool> DeleteStatusAsync(int id)
     {
-        var statusEntity = await _statusRepository.GetAsync(x => x.Id == id);
-        if (statusEntity == null)
-        {
-            throw new Exception("Status not found");
-        }
-        return await _statusRepository.DeleteAsync(x => x.Id == id);
-    }
+        await _statusRepository.BeginTransactionAsync();
 
+        try
+        {
+            var statusEntity = await _statusRepository.GetAsync(x => x.Id == id);
+            if (statusEntity == null)
+            {
+                throw new Exception("Status not found");
+            }
+
+            var result = await _statusRepository.DeleteAsync(x => x.Id == id);
+            await _statusRepository.CommitTransactionAsync();
+            return result;
+        }
+
+        catch (Exception ex)
+        {
+            await _statusRepository.RollbackTransactionAsync();
+            Console.WriteLine(ex.Message);
+            return false;
+        }
+    }
 }

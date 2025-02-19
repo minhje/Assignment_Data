@@ -12,24 +12,23 @@ public class ProductService(IProductRepository productRepository) : IProductServ
 {
     private readonly IProductRepository _productRepository = productRepository;
 
+    // Tog hjälp av ChatGTP 4o för att få in Transaction Management 
     public async Task<ProductModel> CreateProductAsync(ProductRegistrationForm form)
     {
-        if (form != null)
-        {
-            Console.WriteLine("Product already exists");
-        }
+        await _productRepository.BeginTransactionAsync();
 
         try
         {
             var product = ProductFactory.CreateEntity(form);
-            var createdProduct = await _productRepository.CreateAsync(product);
-            var productModel = ProductFactory.CreateModel(createdProduct);
-            return productModel;
+            await _productRepository.CreateAsync(product);
+            await _productRepository.CommitTransactionAsync();
+            return ProductFactory.CreateModel(product);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
-            return null!;
+            await _productRepository.RollbackTransactionAsync();
+            throw;
         }
     }
 
@@ -48,30 +47,64 @@ public class ProductService(IProductRepository productRepository) : IProductServ
             Console.WriteLine("Product not found");
             return null!;
         }
-        var productEntity = await _productRepository.GetAsync(expression);
-        return ProductFactory.CreateModel(productEntity);
+
+        try 
+        { 
+            var productEntity = await _productRepository.GetAsync(expression);
+            return ProductFactory.CreateModel(productEntity);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return null!;
+        }
 
 
     }
 
     public async Task<ProductModel> UpdateProductAsync(ProductUpdateForm form)
     {
-        var productEntity = await _productRepository.GetAsync(x => x.Id == form.Id);
-        if (productEntity == null)
+        await _productRepository.BeginTransactionAsync();
+
+        try
         {
-            throw new Exception("Product not found");
-        }
+           var productEntity = await _productRepository.GetAsync(x => x.Id == form.Id);
+           if (productEntity == null)
+           {
+               throw new Exception("Product not found");
+           }
         var updatedProductEntity = ProductFactory.CreateEntity(productEntity, form);
-        return ProductFactory.CreateModel(updatedProductEntity);
+            await _productRepository.CommitTransactionAsync();
+            return ProductFactory.CreateModel(updatedProductEntity);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            await _productRepository.RollbackTransactionAsync();
+            throw;
+        }
     }
 
     public async Task<bool> DeleteProductAsync(int id)
     {
-        var productEntity = await _productRepository.GetAsync(x => x.Id == id);
-        if (productEntity == null)
+        await _productRepository.BeginTransactionAsync();
+
+        try
         {
-            throw new Exception("Product not found");
+            var productEntity = await _productRepository.GetAsync(x => x.Id == id);
+            if (productEntity == null)
+            {
+                throw new Exception("Product not found");
+            }
+            var result = await _productRepository.DeleteAsync(x => x.Id == id);
+            await _productRepository.CommitTransactionAsync();
+            return result;
         }
-        return await _productRepository.DeleteAsync(x => x.Id == id); 
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            await _productRepository.RollbackTransactionAsync();
+            throw;
+        }
     }
 }

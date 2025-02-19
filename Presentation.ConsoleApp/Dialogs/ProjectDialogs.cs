@@ -228,7 +228,12 @@ public class ProjectDialogs : IProjectDialogs
             Console.WriteLine($"Project description: {project.Description}");
             Console.WriteLine($"Project start date: {project.StartDate}");
             Console.WriteLine($"Project end date: {project.EndDate}");
-            Console.WriteLine($"Project status: {project.Status}");
+            Console.WriteLine($"Project status: {project.StatusId}");
+            Console.WriteLine($"Project customer: {project.CustomerId}");
+            Console.WriteLine($"Project product: {project.ProductId}");
+            Console.WriteLine($"Project manager: {project.ManagerId}");
+
+
         }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
