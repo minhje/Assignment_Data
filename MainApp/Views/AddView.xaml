@@ -4,7 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="clr-namespace:MainApp.ViewModels"
-                xmlns:views="clr-namespace:MainApp.Views"
+             xmlns:views="clr-namespace:MainApp.Views"
              d:DataContext="{d:DesignInstance Type=viewmodels:AddViewModel}"
              mc:Ignorable="d" 
              Background="#FFFFFF"
@@ -12,6 +12,12 @@
 
     <Border>
         <Grid Margin="15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
@@ -20,29 +26,31 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="New project" Style="{StaticResource Heading}"/>
             
-            <StackPanel Grid.Row="1" Margin="0 15 0 0">
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="15">
                 <TextBlock Text="Project ID" Style="{StaticResource Text}"/>
-                <TextBlock Text="{Binding ProjectRegistrationForm.Id}" Style="{StaticResource NoEditForm}" Margin="0,0,0,10" Padding="4"/>
+                <TextBlock Text="{Binding ProjectRegistrationForm.Id}" Style="{StaticResource NoEditForm}" Margin="0 5 0 10" Padding="4"/>
                 
                 <TextBlock Text="Project Title" Style="{StaticResource Text}"/>
-                <TextBox Text="{Binding ProjectRegistrationForm.Title}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+                <TextBox Text="{Binding ProjectRegistrationForm.Title}" Style="{StaticResource Form}" Margin="0 5 0 10" Padding="4"/>
 
                 <TextBlock Text="Description" Style="{StaticResource Text}"/>
-                <TextBox Text="{Binding ProjectRegistrationForm.Description}" Style="{StaticResource Form}" Margin="0,0,0,10" Padding="4"/>
+                <TextBox Text="{Binding ProjectRegistrationForm.Description}" Style="{StaticResource Form}" Margin="0 5 0 10" Padding="4"/>
 
                 <TextBlock Text="Start Date" Style="{StaticResource Text}"/>
-                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.StartDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.StartDate}" Style="{StaticResource DatePicker}" Margin="0 5 0 10" Padding="4"/>
 
                 <TextBlock Text="End Date" Style="{StaticResource Text}"/>
-                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.EndDate}" Style="{StaticResource DatePicker}" Margin="0,0,0,10" Padding="4"/>
+                <DatePicker SelectedDate="{Binding ProjectRegistrationForm.EndDate}" Style="{StaticResource DatePicker}" Margin="0 5 0 10" Padding="4"/>
+                </StackPanel>
 
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="15">
                 <TextBlock Text="Status" Style="{StaticResource Text}"/>
                 <ComboBox ItemsSource="{Binding Statuses}"
                           DisplayMemberPath="Status"
                           SelectedValuePath="Id"
                           SelectedValue="{Binding ProjectRegistrationForm.StatusId}"
                           Style="{StaticResource ComboBox}"
-                          Margin="0,0,0,10"
+                          Margin="0 5 0 10"
                           Padding="4"/>
 
                 <TextBlock Text="Project Manager" Style="{StaticResource Text}"/>
@@ -51,7 +59,7 @@
                           SelectedValuePath="Id" 
                           SelectedValue="{Binding ProjectRegistrationForm.ManagerId}" 
                           Style="{StaticResource ComboBox}" 
-                          Margin="0,0,0,10" 
+                          Margin="0 5 0 10" 
                           Padding="4"/>
 
                 <TextBlock Text="Project Customer" Style="{StaticResource Text}"/>
@@ -60,7 +68,7 @@
                           SelectedValuePath="Id"
                           SelectedValue="{Binding ProjectRegistrationForm.CustomerId}"
                           Style="{StaticResource ComboBox}"
-                          Margin="0,0,0,10"
+                          Margin="0 5 0 10"
                           Padding="4"/>
 
                 <TextBlock Text="Product" Style="{StaticResource Text}"/>
@@ -68,12 +76,19 @@
                           DisplayMemberPath="NamePrice"
                           SelectedValuePath="Id"
                           SelectedValue="{Binding ProjectRegistrationForm.ProductId}"
+                          SelectedItem="{Binding ProjectRegistrationForm.SelectedProduct}"
                           Style="{StaticResource ComboBox}"
-                          Margin="0,0,0,10"
+                          Margin="0 5 0 10"
                           Padding="4"/>
+
+                <TextBlock Text="Hours" Style="{StaticResource Text}"/>
+                <TextBox Text="{Binding ProjectRegistrationForm.Hours, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Form}" Margin="0 5 0 10" Padding="4"/>
+
+                <TextBlock Text="Total Price" Style="{StaticResource Text}"/>
+                <TextBlock Text="{Binding ProjectRegistrationForm.TotalPrice, StringFormat=C}" Style="{StaticResource NoEditForm}" Margin="0 5 0 10" Padding="4"/>
+
             </StackPanel>    
          
-
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Save" Padding="5" Margin="0 10 0 5" Command="{Binding SaveCommand}" Style="{StaticResource PrimaryButton}"/>
                 <Button Content="Cancel" Padding="5" Margin="5 10 0 5" Command="{Binding CancelCommand}" Style="{StaticResource PrimaryButton}"/>

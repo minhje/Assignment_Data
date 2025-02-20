@@ -9,7 +9,9 @@ using MainApp.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Globalization;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace MainApp;
 
@@ -54,6 +56,19 @@ public partial class App : Application
 
     protected override void OnStartup(StartupEventArgs e)
     {
+        /* Genererat av Chat GPT 4o för att lösa ett problem med att jag fick två olika valutor i min presentation. 
+         * Sätter culture till sverige för att få svensk valuta. */
+        var culture = new CultureInfo("sv-SE");
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+        // Försäkrar att hela applikationen använder sig av svenska språket och valutan
+        FrameworkElement.LanguageProperty.OverrideMetadata(
+            typeof(FrameworkElement), 
+            new FrameworkPropertyMetadata(
+                XmlLanguage.GetLanguage(culture.IetfLanguageTag)));
+        // Slut genererad kod
+
         var mainViewModel = _host.Services.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _host.Services.GetRequiredService<ListViewModel>();
 
