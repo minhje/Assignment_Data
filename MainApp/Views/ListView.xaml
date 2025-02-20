@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ListViewModel}"
              mc:Ignorable="d" 
              Background="Transparent"
-             d:DesignHeight="700" d:DesignWidth="900">
+             d:DesignHeight="600" d:DesignWidth="900">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}" Margin="10"/>
+            <TextBlock Grid.Column="0" Text="PROJECTS" Style="{StaticResource Heading}" Margin="15 0 0 0"/>
             <Button Grid.Column="1" Command="{Binding GoToAddViewCommand}" Style="{StaticResource AddProjectButton}" Margin="10"/>
         </Grid>
 

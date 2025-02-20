@@ -17,7 +17,7 @@
         Background="Transparent"
         AllowsTransparency="True"
         
-        Title="Start" Height="720" Width="850">
+        Title="Start" Height="600" Width="850">
     
     <Border Background="#F5F5F5" CornerRadius="3">
         <Grid Margin="5">

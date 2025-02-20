@@ -10,18 +10,23 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DetailsViewModel}"
              mc:Ignorable="d" 
              Background="Transparent" 
-             d:DesignHeight="700" d:DesignWidth="1000">
+             d:DesignHeight="600" d:DesignWidth="1000">
 
     <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Project details" Style="{StaticResource Heading}"/>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Project details" Style="{StaticResource Heading}" Margin="14 0 0 15"/>
 
-        <StackPanel Grid.Row="1" Margin="0 20 0 0">
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="15">
             <TextBlock Text="Project Id" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.Id}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
@@ -36,12 +41,11 @@
 
             <TextBlock Text="End date" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.EndDate, StringFormat='{}{0:yyyy-MM-dd}'}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
-
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="15">
             <TextBlock Text="Status" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.StatusName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
-
-            <TextBlock Text="Product" Style="{StaticResource Text}" />
-            <TextBlock Text="{Binding ProductNamePrice}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
             <TextBlock Text="Customer" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.CustomerName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
@@ -49,11 +53,13 @@
             <TextBlock Text="Manager" Style="{StaticResource Text}" />
             <TextBlock Text="{Binding ProjectModel.ManagerName}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
 
+            <TextBlock Text="Product" Style="{StaticResource Text}" />
+            <TextBlock Text="{Binding ProductNamePrice}" Style="{StaticResource SecondaryText}" Margin="0,0,0,10" Padding="0" />
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
-            <Button Content="Edit" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToEditViewCommand}" Style="{StaticResource PrimaryButton}"/>
-            <Button Content="Cancel" Padding="5" Margin="0 10 0 5" HorizontalAlignment="Stretch" Command="{Binding GoToListViewCommand}" Style="{StaticResource PrimaryButton}"/>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Edit" Padding="5" Margin="0 10 0 5" Command="{Binding GoToEditViewCommand}" Style="{StaticResource PrimaryButton}"/>
+            <Button Content="Cancel" Padding="5" Margin="5 10 0 5" Command="{Binding GoToListViewCommand}" Style="{StaticResource PrimaryButton}"/>
 
         </StackPanel>
 

@@ -11,15 +11,11 @@ namespace MainApp.ViewModels;
 
 public partial class EditViewModel : ObservableObject
 {
-    private readonly IServiceProvider _serviceProvider;
     private readonly IProjectService _projectService;
+    private readonly IServiceProvider _serviceProvider;
 
     [ObservableProperty]
-    private ProjectUpdateForm _projectUpdateForm = new()
-     {
-        StartDate = DateTime.Now,
-        EndDate = DateTime.Now
-    };
+    private ProjectUpdateForm _projectUpdateForm;
 
     /* Genererat av Chat GPT 4o för att kunna hämta in dessa till ComboBox i WPF applikationen*/
     [ObservableProperty]
@@ -33,9 +29,6 @@ public partial class EditViewModel : ObservableObject
 
     [ObservableProperty]
     private ObservableCollection<StatusModel> _statuses = new();
-
-    //[ObservableProperty]
-    //private int _selectedManagerId;
     /* Slut genererad kod */
 
     public EditViewModel(IProjectService projectService, IServiceProvider serviceProvider)
@@ -57,7 +50,6 @@ public partial class EditViewModel : ObservableObject
                 mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
             }
         }
-
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
@@ -70,7 +62,6 @@ public partial class EditViewModel : ObservableObject
         var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
     }
-
 
     /* Generarat av Chat GPT 4o */
     private async Task LoadDataAsync()
