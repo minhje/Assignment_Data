@@ -61,8 +61,8 @@ public partial class AddViewModel : ObservableObject
             var result = await _projectService.CreateProjectAsync(ProjectRegistrationForm);
             if (result != null)
             {
-                ProjectRegistrationForm.Id = result.Id; // Update the form with the ID from the database
-                OnPropertyChanged(nameof(ProjectRegistrationForm)); // Notify the view of the change
+                ProjectRegistrationForm.Id = result.Id;
+                OnPropertyChanged(nameof(ProjectRegistrationForm)); // Genererat av Chat GPT4o för att visa vilket ID ett projekt kommer att få efter det skapats.
                 var mainViewModel = _serviceProvider.GetRequiredService<MainViewModel>();
                 mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
             }
@@ -80,7 +80,7 @@ public partial class AddViewModel : ObservableObject
         mainViewModel.CurrentViewModel = _serviceProvider.GetRequiredService<ListViewModel>();
     }
 
-    /* Generarat av Chat GPT 4o */
+    // Generarat av Chat GPT 4o för att ladda in manager, customer, products och statuses
     private async Task LoadDataAsync()
     {
         var managers = await _projectService.GetManagersAsync();

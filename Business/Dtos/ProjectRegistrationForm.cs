@@ -25,8 +25,7 @@ public class ProjectRegistrationForm : ObservableObject
 
 
     /* Genererat av chat GPT 4o för att kunna ränka ut totalpris för ett projekt 
-     * _hours skapas och får ett värde från användaren, _totalPrice räknas ut genom att multiplicera _hours med priset på vald produkt.
-     */
+     * _hours skapas och får ett värde från användaren, _totalPrice räknas ut genom att multiplicera _hours med priset på vald produkt. */
     private int _hours;
     public int Hours
     {

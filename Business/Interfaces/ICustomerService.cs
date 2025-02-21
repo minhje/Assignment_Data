@@ -12,5 +12,4 @@ public interface ICustomerService
     Task<CustomerModel> GetCustomerAsync(Expression<Func<CustomerEntity, bool>> expression);
     Task<CustomerModel> UpdateCustomerAsync(CustomerUpdateForm form);
     Task<bool> DeleteCustomerAsync(int id);
-    //Task<bool> CheckIfCustomerExistsAsync(Expression<Func<CustomerEntity, bool>> expression);
 }

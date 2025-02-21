@@ -12,5 +12,4 @@ public interface IProductService
     Task<ProductModel> GetProductAsync(Expression<Func<ProductEntity, bool>> expression);
     Task<ProductModel> UpdateProductAsync(ProductUpdateForm form);
     Task<bool> DeleteProductAsync(int id);
-    //Task<bool> CheckIfProductExistsAsync(Expression<Func<ProductEntity, bool>> expression);
 }

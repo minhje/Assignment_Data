@@ -12,5 +12,4 @@ public interface IManagerService
     Task<ManagerModel> GetManagerAsync(Expression<Func<ManagerEntity, bool>> expression);
     Task<ManagerModel> UpdateManagerAsync(ManagerUpdateForm form);
     Task<bool> DeleteManagerAsync(int id);
-    //Task<bool> CheckIfManagerExistsAsync(Expression<Func<ManagerEntity, bool>> expression);
 }

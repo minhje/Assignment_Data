@@ -20,6 +20,7 @@ public interface IProjectService
     Task<IEnumerable<ProductModel>> GetProductsAsync();
     Task<IEnumerable<StatusModel>> GetStatusesAsync();
 
-    // Genererat av chat GPT 4o för att kunna visa vilket ID som projektet kommer att få. 
+
+    // Genererat av chat GPT 4o för att kunna visa i WPF presentationen vilket ID som projektet kommer att få. 
     Task<int> GetNextProjectIdAsync(); // New method to get the next available project ID
 }
